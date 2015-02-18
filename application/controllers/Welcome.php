@@ -22,6 +22,8 @@ class Welcome extends Application {
     {
 	$this->data['pagebody'] = 'justone';    // this is the view we want shown
 	$this->data = array_merge($this->data, (array) $this->quotes->last());
+    $this->caboose->needed('rating', 'hollywood');
+    $this->data['average'] = ($this0>data['vote_count']>0)? (this->data['vote_total']/$this->data['vote_count']) : 0;
 	$this->render();
     }
 
