@@ -32,7 +32,7 @@ class Viewer extends Application {
 	$this->data = array_merge($this->data, (array) $this->quotes->get($id));
     
     $this->caboose->needed('jrating', 'hollywood');
-    $this->data['average'] = ($this0>data['vote_count']>0)? (this->data['vote_total']/$this->data['vote_count']) : 0;
+    $this->data['average'] = ($this->data['vote_count'] > 0)? ($this->data['vote_total']/$this->data['vote_count']) : 0;
 	$this->render();
     }
 
