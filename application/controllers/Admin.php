@@ -9,8 +9,10 @@ class Admin extends Application {
 
     function index()
     {
-	$this->data['pagebody'] = 'homepage';    // this is the view we want shown
-	$this->render();
+        $this->data['title'] = 'Quotations Maintenance';
+        $this->data['quotes'] = $this->quotes->all();
+        $this->data['pagebody'] = 'admin_list';    // this is the view we want shown
+        $this->render();
     }
 
 }
