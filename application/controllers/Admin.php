@@ -14,6 +14,11 @@ class Admin extends Application {
         $this->data['pagebody'] = 'admin_list';    // this is the view we want shown
         $this->render();
     }
+    
+    function add()
+    {
+        
+    }
 
 }
 

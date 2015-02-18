@@ -35,9 +35,9 @@ class Application extends CI_Controller {
         $this->data['content'] = $this->parser->parse($this->data['pagebody'], $this->data, true);
 
         //set view parameters from the Caboose library
-        $this -> data['caboose_styles'] = $this -> caboose -> styles();
-        $this -> data['caboose_scripts'] = $this -> caboose -> scripts();
-        $this -> data['caboose_trailings'] = $this -> caboose -> trailings();
+        $this->data['caboose_styles'] = $this->caboose->styles();
+        $this->data['caboose_scripts'] = $this->caboose->scripts();
+        $this->data['caboose_trailings'] = $this->caboose->trailings();
         
         // finally, build the browser page!
         $this->data['data'] = &$this->data;
