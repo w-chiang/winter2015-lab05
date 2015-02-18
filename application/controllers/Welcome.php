@@ -21,7 +21,12 @@ class Welcome extends Application {
     function index()
     {
 	$this->data['pagebody'] = 'justone';    // this is the view we want shown
-	$this->data = array_merge($this->data, (array) $this->quotes->last());
+    
+    //randomize the quote displays
+    $choice = rand(1,$this->quotes->size());
+	$this->data = array_merge($this->data, (array) $this->quotes->get($choice));
+    
+    
     $this->caboose->needed('rating', 'hollywood');
     $this->data['average'] = ($this0>data['vote_count']>0)? (this->data['vote_total']/$this->data['vote_count']) : 0;
 	$this->render();
