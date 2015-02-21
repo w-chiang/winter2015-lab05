@@ -26,7 +26,15 @@ class Admin extends Application {
     //builds the form using formfields helper
     function present($quote)
     {
-        $this->data['fid'] = makeTextField('ID#', 'id', $quote->id);
+        $message = '';
+        if (count($this->errors) > 0)
+        {
+            foreach($this->errors as $booboo)
+                $message .= $booboo . BR;
+        }
+        $this->data['message'] = $message;
+        
+        $this->data['fid'] = makeTextField('ID#', 'id', $quote->id, "Unique quote identifier, system-assigned", 10, 10, true);
         $this->data['fwho'] = makeTextField('Author', 'who', $quote->who);
         $this->data['fmug'] = makeTextField('Picture', 'mug', $quote->mug);
         $this->data['fwhat'] = makeTextField('Quote', 'what', $quote->what);
@@ -38,11 +46,25 @@ class Admin extends Application {
     //confirms quote form
     function confirm()
     {
+        //pull information from form
         $record = $this->quotes->create();
         $record->id = $this->input->post('id');
         $record->who = $this->input->post('who');
         $record->mug = $this->input->post('mug');
         $record->what = $this->input->post('what');
+        
+        //validate
+        if (empty($record->who))
+            $this->errors[] = 'You must specify an author.';
+        if(strlen($record->what) < 20)
+            $this->errors[] = 'A quote must be at least 20 characters long';
+        if(count($this->errors) > 0)
+        {
+            $this->present($record);
+            return;
+        }
+        
+        //save entry
         if (empty($record->id)) 
             $this->quotes->add($record);
         else

@@ -1,5 +1,7 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+define('BR', '<br/>');
+
 // location of data folders
 define('DATA_FOLDER', './data');
 
