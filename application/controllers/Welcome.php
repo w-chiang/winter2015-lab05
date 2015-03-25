@@ -15,25 +15,54 @@ class Welcome extends Application {
     }
 
     //-------------------------------------------------------------
-    //  The normal pages
+    //  Homepage: show a list of the orders on file
     //-------------------------------------------------------------
 
     function index()
     {
-	$this->caboose->needed('jrating', 'hollywood');
-    $this->data['pagebody'] = 'justone';    // this is the view we want shown
+        $this->load->helper('directory');    
+            
+        // Build a list of orders
+        $map = directory_map('./data/', 1);
+        $orders = array();
+        foreach ($map as &$f) {
+            if ($this->startsWith($f, 'order') && $this->endsWith($f, '.xml')){
+                $orders[] = array( 'href' => '/welcome/order/'.$f, 'file' => $f );
+            }
+        }
+        
+        $this->data['files'] = $orders;
+        
+        // Present the list to choose from
+        $this->data['pagebody'] = 'homepage';
+        
+        $this->render();
+        }
     
-    //randomize the quote displays
-    $choice = rand(1,$this->quotes->size());
-	$this->data = array_merge($this->data, (array) $this->quotes->get($choice));
-    
-    
-    
-    $this->data['average'] = ($this->data['vote_count'] > 0)? ($this->data['vote_total']/$this->data['vote_count']) : 0;
-	$this->render();
+    //-------------------------------------------------------------
+    //  Show the "receipt" for a specific order
+    //-------------------------------------------------------------
+
+    function order($filename)
+    {
+        // Build a receipt for the chosen order
+	
+        // Present the list to choose from
+        $this->data['pagebody'] = 'justone';
+        $this->render();
     }
-
+    
+    
+    
+    
+    //can move this to a model later
+    function startsWith($haystack, $needle) {
+        // search backwards starting from haystack length characters from the end
+        return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== FALSE;
+    }
+    
+    function endsWith($haystack, $needle) {
+        // search forward starting from end minus needle length characters
+        return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== FALSE);
+    }
 }
-
-/* End of file Welcome.php */
-/* Location: application/controllers/Welcome.php */

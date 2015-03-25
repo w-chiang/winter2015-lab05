@@ -18,15 +18,9 @@ if (!defined('APPPATH'))
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link href="/assets/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
         <link rel="stylesheet" type="text/css" href="/assets/css/style.css"/>
-        {caboose_styles}
     </head>
     <body>
-        <div class="container">
-            <div class="navbar">
-                <div class="navbar-inner">
-                    <a class="brand" href="/"><img src="/assets/images/logo.png"/></a>
-                    {menubar} </div>
-            </div>           
+        <div class="container">         
             <div id="content">
                 <h1>{title}</h1>
                 {content}
@@ -37,7 +31,5 @@ if (!defined('APPPATH'))
         </div>
         <script src="/assets/js/jquery-1.11.1.min.js"></script>
         <script src="/assets/js/bootstrap.min.js"></script>
-        {caboose_scripts}
-        {caboose_trailings}
     </body>
 </html>

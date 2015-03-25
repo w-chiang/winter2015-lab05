@@ -1,5 +1,11 @@
 <div class="row">
-    {authors}
-    <div class="span4"><a href="/viewer/quote/{id}"><img src="/data/{mug}" title="{who}"/></a></div>
-    {/authors}
+<h3>Barker Bob's Burger Bar - Orders</h3>
+
+<ul>
+{files}
+    <li><a href={href}>{file}</a></p></li>
+{/files}
+</ul>
+
+<p>Select an order from the list above to see its receipt</p>
 </div>
