@@ -45,6 +45,7 @@ class Welcome extends Application {
 
     function order($filename)
     {
+        $this->load->model('menu');
         // Build a receipt for the chosen order
 	
         // Present the list to choose from
