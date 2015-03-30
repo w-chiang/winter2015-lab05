@@ -45,10 +45,20 @@ class Welcome extends Application {
 
     function order($filename)
     {
-        $this->load->model('menu');
         // Build a receipt for the chosen order
-	
-        // Present the list to choose from
+        $this->load->model('order');
+        $order = new Order($filename); 
+    
+        // Get order details from model
+        $this->data['filename'] = $filename;
+        $this->data['customer'] = $order->customer;
+        $this->data['type'] = $order->ordertype;
+        $this->data['burgers'] = $order->allburgers;
+        $this->data['ordertotal'] = $order->ordertotal;
+        $this->data['special'] = $order->special;
+        
+    
+        // Display order
         $this->data['pagebody'] = 'justone';
         $this->render();
     }

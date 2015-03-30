@@ -20,7 +20,7 @@ class Menu extends CI_Model {
         $this->xml = simplexml_load_file(DATAPATH . 'menu.xml');
 
         // build the list of patties - approach 1
-        foreach ($this->$xml->patties->patty as $patty) {
+        foreach ($this->xml->patties->patty as $patty) {
             $patty_names[(string) $patty['code']] = (string) $patty;
         }
 
@@ -54,9 +54,12 @@ class Menu extends CI_Model {
     }
 
     // retrieve a patty record, perhaps for pricing
-    function getPatty($code) {
+    function pattyCost($code) {
         if (isset($this->patties[$code]))
-            return $this->patties['code'];
+        {
+            $record = $this->patties[$code];
+            return $record->price;
+        }
         else
             return null;
     }

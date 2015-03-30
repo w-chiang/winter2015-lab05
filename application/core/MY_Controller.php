@@ -31,13 +31,13 @@ class Application extends CI_Controller {
      * Render this page
      */
     function render() {
-        $this->data['menubar'] = $this->parser->parse('_menubar', $this->config->item('menu_choices'),true);
+        //$this->data['menubar'] = $this->parser->parse('_menubar', $this->config->item('menu_choices'),true);
         $this->data['content'] = $this->parser->parse($this->data['pagebody'], $this->data, true);
 
         //set view parameters from the Caboose library
-        $this->data['caboose_styles'] = $this->caboose->styles();
-        $this->data['caboose_scripts'] = $this->caboose->scripts();
-        $this->data['caboose_trailings'] = $this->caboose->trailings();
+        //$this->data['caboose_styles'] = $this->caboose->styles();
+        //$this->data['caboose_scripts'] = $this->caboose->scripts();
+        //$this->data['caboose_trailings'] = $this->caboose->trailings();
         
         // finally, build the browser page!
         $this->data['data'] = &$this->data;
