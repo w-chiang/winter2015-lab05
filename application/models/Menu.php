@@ -11,6 +11,8 @@ class Menu extends CI_Model {
     protected $xml = null;
     protected $patty_names = array();
     protected $patties = array();
+    protected $cheeses = array();
+    protected $toppings = array();
 
     // Constructor
     public function __construct() {
@@ -29,6 +31,20 @@ class Menu extends CI_Model {
             $record->name = (string) $patty;
             $record->price = (float) $patty['price'];
             $patties[$record->code] = $record;
+        }       
+        foreach ($this->xml->cheeses->cheese as $cheese) {
+            $record = new stdClass();
+            $record->name = (string) $cheese;
+            $record->code = (string) $cheese['code'];
+            $record->price = (float) $cheese['price'];
+            $this->cheeses[$record->code] = $record;
+        } 
+        foreach ($this->xml->toppings->topping as $topping) {
+            $record = new stdClass();
+            $record->name = (string) $topping;
+            $record->code = (string) $topping['code'];
+            $record->price = (float) $topping['price'];
+            $this->toppings[$record->code] = $record;
         }
     }
 
@@ -41,6 +57,26 @@ class Menu extends CI_Model {
     function getPatty($code) {
         if (isset($this->patties[$code]))
             return $this->patties['code'];
+        else
+            return null;
+    }
+    
+    function cheeseCost($code) {
+        if (isset($this->cheeses[$code]))
+        {
+            $record = $this->cheeses[$code];
+            return $record->price;
+        }
+        else
+            return null;
+    }
+    
+    function toppingCost($code) {
+        if (isset($this->toppings[$code]))
+        {
+            $record = $this->toppings[$code];
+            return $record->price;
+        }
         else
             return null;
     }
